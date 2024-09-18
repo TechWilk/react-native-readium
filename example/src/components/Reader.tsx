@@ -20,6 +20,7 @@ import { Settings as ReaderSettings } from './Settings';
 
 export const Reader: React.FC = () => {
   const [toc, setToc] = useState<Link[] | null>([]);
+  const [errors, setErrors] = useState<string[]>([]);
   const [file, setFile] = useState<File>();
   const [location, setLocation] = useState<Locator | Link>();
   const [settings, setSettings] = useState<Partial<Settings>>(DEFAULT_SETTINGS);
@@ -101,10 +102,21 @@ export const Reader: React.FC = () => {
                 if (toc) {setToc(toc);}
               }}
               onError={(error: Error) => {
+                setErrors((e) => [
+                  ...e,
+                  error?.message ?? JSON.stringify(error),
+                ]);
                 console.log(error);
               }}
             />
           </View>
+          {errors && (
+            <View style={styles.container}>
+              {errors.map((e, i) => (
+                <Text key={i}>{e}</Text>
+              ))}
+          </View>
+          )}
           {Platform.OS === 'web' ? (
             <ReaderButton
               name="chevron-right"
