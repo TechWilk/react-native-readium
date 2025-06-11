@@ -33,6 +33,7 @@ class ReadiumView : UIView, Loggable {
       self.updateUserSettings(settings)
     }
   }
+  @objc var onError: RCTDirectEventBlock?
   @objc var onLocationChange: RCTDirectEventBlock?
   @objc var onTableOfContents: RCTDirectEventBlock?
 

@@ -19,6 +19,7 @@ export const ReadiumView: React.FC<ReadiumProps> = forwardRef(
     {
       onLocationChange: wrappedOnLocationChange,
       onTableOfContents: wrappedOnTableOfContents,
+      onError: wrappedOnError,
       settings: unmappedSettings,
       ...props
     },
@@ -65,6 +66,15 @@ export const ReadiumView: React.FC<ReadiumProps> = forwardRef(
       [wrappedOnTableOfContents]
     );
 
+    const onError = useCallback(
+      (event: any) => {
+        if (wrappedOnError) {
+          wrappedOnError(event.nativeEvent);
+        }
+      },
+      [wrappedOnError]
+    );
+
     // create the view fragment on android
     useEffect(() => {
       if (Platform.OS === 'android' && defaultRef.current) {
@@ -90,6 +100,7 @@ export const ReadiumView: React.FC<ReadiumProps> = forwardRef(
           {...props}
           onLocationChange={onLocationChange}
           onTableOfContents={onTableOfContents}
+          onError={onError}
           settings={
             unmappedSettings ? Settings.map(unmappedSettings) : undefined
           }

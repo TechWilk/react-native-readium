@@ -12,7 +12,14 @@ export type BaseReadiumViewProps = {
   style?: ViewStyle;
   onLocationChange?: (locator: Locator) => void;
   onTableOfContents?: (toc: Link[] | null) => void;
+  onError?: (error: Error) => void;
   ref?: any;
   height?: number;
   width?: number;
+};
+
+export type Error = {
+  severity: 'warning' | 'fatal';
+  message: string;
+  detail: string;
 };

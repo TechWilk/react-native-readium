@@ -41,6 +41,13 @@ class ReadiumViewManager(
           MapBuilder.of("bubbled", ON_TABLE_OF_CONTENTS)
         )
       )
+      .put(
+        ON_ERROR,
+        MapBuilder.of(
+          "phasedRegistrationNames",
+          MapBuilder.of("bubbled", ON_ERROR)
+        )
+      )
       .build()
   }
 
@@ -143,6 +150,7 @@ class ReadiumViewManager(
   companion object {
     var ON_LOCATION_CHANGE = "onLocationChange"
     var ON_TABLE_OF_CONTENTS = "onTableOfContents"
+    var ON_ERROR = "onError"
     var COMMAND_CREATE = 1
   }
 }

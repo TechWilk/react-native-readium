@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, View, Text, Platform, DimensionValue } from 'react-native';
 import {
+  Error,
   ReadiumView,
   Settings,
 } from 'react-native-readium';
@@ -98,6 +99,9 @@ export const Reader: React.FC = () => {
               onLocationChange={(locator: Locator) => setLocation(locator)}
               onTableOfContents={(toc: Link[] | null) => {
                 if (toc) {setToc(toc);}
+              }}
+              onError={(error: Error) => {
+                console.log(error);
               }}
             />
           </View>
